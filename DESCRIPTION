@@ -1,0 +1,15 @@
+Package: bayesreg
+Version: 0.0.0.9000
+Title: Bayesian Regularization for Linear Regression Models
+Description: Performs Bayesian regularization for linear regression models. Multiple shrinkage priors are implemented that will shrink small regression coefficients towards zero. Models are pre-compiled and run using the probabilistic programming language Stan.
+Authors@R: person("Sara", "van Erp", , "sara.vanerp@gmail.com", c("aut", "cre"))
+License: GPL (>=3)
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Depends: R (>= 3.4.0), methods, Rcpp (>= 0.12.19)
+Imports: rstan (>= 2.18.1), rstantools (>= 1.5.1)
+LinkingTo: StanHeaders (>= 2.18.0), rstan (>= 2.18.1), BH (>= 1.66.0-1), Rcpp (>= 0.12.19), RcppEigen (>= 0.3.3.4.0)
+SystemRequirements: GNU make
+NeedsCompilation: yes
+RoxygenNote: 6.0.1
