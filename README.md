@@ -52,7 +52,7 @@ sim.lm <- function(nobs, cfs, sd, cov.mat){
   return (list(x=X, y=y, coefficients=cfs, var=sd^2, covX=cov.mat))
 }
 
-dat <- sim.lm(nobs = 240, cfs = c(3, 1.5, 0, 0, 2, 0, 0, 0), sd = 3, cov.mat = matrix(0.5, ncol=8, nrow=8))
+dat <- sim.lm(nobs = 240, cfs = c(3, 1.5, 0, 0, 2, 0, 0, 0), sd = 3, cov.mat = diag(8))
 ```
 
 The function `stan_reg_lm` is used to fit the model:
