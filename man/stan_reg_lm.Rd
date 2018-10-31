@@ -6,9 +6,9 @@
 \usage{
 stan_reg_lm(X, y, N_train, prior = c("ridge", "student", "lasso",
   "elasticNet", "hyperlasso", "horseshoe", "regularizedHorseshoe", "mixture"),
-  missing = c(TRUE, FALSE), df = 0.5, p0 = NA, global_scale = 1,
-  global_df = 1, local_df = 1, slab_scale = 1, slab_df = 1,
-  hyperprior_mix = c("Bernoulli", "uniform"), ...)
+  df = 0.5, p0 = NA, global_scale = 1, global_df = 1, local_df = 1,
+  slab_scale = 1, slab_df = 1, hyperprior_mix = c("Bernoulli", "uniform"),
+  ...)
 }
 \arguments{
 \item{X}{Numeric matrix[N, p] of input values. The input values get automatically standardized in the function.}
@@ -19,8 +19,6 @@ stan_reg_lm(X, y, N_train, prior = c("ridge", "student", "lasso",
 
 \item{prior}{Shrinkage prior to use for regularization. Current options are: ridge, student, lasso,
 elasticNet, hyperlasso, horseshoe, regularizedHorseshoe, and mixture.}
-
-\item{missing}{Logical value indicating whether the data contains missing values. Currently only supported in combination with the ridge prior.}
 
 \item{df}{Degrees of freedom for the hyperlasso. Defaults to 0.5, but larger values can lead to less divergent transitions.}
 
