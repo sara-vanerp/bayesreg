@@ -28,6 +28,12 @@ Next, install **bayesreg** and make sure that `local = TRUE` to avoid recompilat
 ```
 install_github("sara-vanerp/bayesreg", local = TRUE)
 ```
+On Windows, the above method might not always work. In that case, download the zip file for the package, unzip it, and install the package directly using **devtools** as follows:
+
+```
+path <- "insert path to package folder"
+install(path)
+```
 
 The package can now be loaded into R and used:
 
