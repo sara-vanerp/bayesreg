@@ -1,5 +1,5 @@
 # bayesreg
-An R package to perform Bayesian regularization using Stan. Models are pre-compiled and run using the probabilistic programming language [Stan](http://mc-stan.org). Currently only supports Bayesian regularization for linear regression models. Multiple shrinkage priors are implemented that will shrink small regression coefficients towards zero. The available options are based on the overview in the preprint [Shrinkage priors for Bayesian penalized regression](https://osf.io/4gr6z/).
+An R package to perform Bayesian regularization using Stan. Models are pre-compiled and run using the probabilistic programming language [Stan](http://mc-stan.org). Currently only supports Bayesian regularization for linear regression models. Multiple shrinkage priors are implemented that will shrink small regression coefficients towards zero. The available options are based on the overview in the preprint [Shrinkage priors for Bayesian penalized regression](https://osf.io/4gr6z/). Note that only the full Bayesian approach is available to estimate the penalty parameter &lambda;.
 
 ## Getting Started
 
