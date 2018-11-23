@@ -4,7 +4,7 @@
 #' shrinkage prior to use for the regression coefficients.
 #' 
 #' @export
-#' @param X Numeric matrix[N, p] of input values. The input values get automatically standardized in the function.
+#' @param X Numeric matrix[N, p] of input values. It is recommended to standardize continuous predictors.
 #' @param y Numeric vector[N] of output values.
 #' @param N_train Size of the training set. First part of the data will be used for training. 
 #' @param prior Shrinkage prior to use for regularization. Current options are: ridge, student, lasso,
@@ -33,15 +33,12 @@ stan_reg_lm <- function(X, y, N_train,
 		if(hyperprior_mix == "Bernoulli"){ mod = "lm_noNA_normalMixBer_FB" }
 	}
 
-	# standardize the predictor matrix
-	stanX = scale(X)
-
 	# extract data information
-	npred = ncol(stanX)
+	npred = ncol(X)
 	ytrain = y[1:N_train]
-	xtrain = stanX[1:N_train, ]
-	ntest = nrow(stanX) - N_train
-	xtest = stanX[(N_train + 1):nrow(stanX), ]
+	xtrain = X[1:N_train, ]
+	ntest = nrow(X) - N_train
+	xtest = X[(N_train + 1):nrow(X), ]
 
 	# create stan input & run
 	if(prior %in% c("ridge", "student", "lasso", "elasticNet", "horseshoe", "mixture")){
