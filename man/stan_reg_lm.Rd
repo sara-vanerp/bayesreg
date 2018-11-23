@@ -11,7 +11,7 @@ stan_reg_lm(X, y, N_train, prior = c("ridge", "student", "lasso",
   ...)
 }
 \arguments{
-\item{X}{Numeric matrix[N, p] of input values. The input values get automatically standardized in the function.}
+\item{X}{Numeric matrix[N, p] of input values. It is recommended to standardize continuous predictors.}
 
 \item{y}{Numeric vector[N] of output values.}
 
