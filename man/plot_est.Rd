@@ -5,7 +5,7 @@
 \title{Plot results for Bayesian regularized regression models}
 \usage{
 plot_est(fit, est = c("mean", "median"), CI = 0.95, npar = 50,
-  names = NULL)
+  names = NULL, pd = 0.5)
 }
 \arguments{
 \item{fit}{A named list with one or more objects of class `stanfit` returned by `stan_reg_lm`.}
@@ -21,6 +21,8 @@ sequence is given, only the parameters given by the sequence are plotted in one 
 
 \item{names}{A character vector of parameter names to include in the plot. Make sure that the names are ordered the
 same way as the columns of the input matrix X used in the `stan_reg_lm` function.}
+
+\item{pd}{Numeric value specifying the width with which to adjust the lines when multiple fitobjects are plotted to avoid overlap.}
 }
 \value{
 A list with ggplot objects.

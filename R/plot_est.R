@@ -15,10 +15,11 @@
 #' 	sequence is given, only the parameters given by the sequence are plotted in one plot.
 #' @param names A character vector of parameter names to include in the plot. Make sure that the names are ordered the
 #' 	same way as the columns of the input matrix X used in the `stan_reg_lm` function.
+#' @param pd Numeric value specifying the width with which to adjust the lines when multiple fitobjects are plotted to avoid overlap.
 #' @return A list with ggplot objects.
 #'
 
-plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names = NULL){
+plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names = NULL, pd = 0.5){
   lb = (1-CI)/2
   lb.char = paste0(lb*100, "%")
   ub = CI + lb
@@ -51,8 +52,8 @@ plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names
     for(i in 1:(length(sq)-1)){
       dfsel = dfm[sq[i]:(sq[i+1]-1), ]
       plotlist[[i]] = ggplot(data = dfsel, aes(x = par, y = est, group = name)) +
-        geom_point(aes(colour = name), position = pd) +
-        geom_errorbar(aes(ymin = lb, ymax = ub, colour = name), position = 0.5) +
+        geom_point(aes(colour = name), position = position_dodge(width = pd)) +
+        geom_errorbar(aes(ymin = lb, ymax = ub, colour = name), position = position_dodge(width = pd)) +
         theme(legend.title = element_blank(), axis.title = element_blank()) +
         geom_hline(yintercept = 0, colour = "darkgrey") +
         coord_flip()
@@ -63,8 +64,8 @@ plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names
     plotlist = list()
     dfsel = dfm[dfm$par %in% levels(dfm$par)[1:10], ]
     plotlist[[1]] = ggplot(data = dfsel, aes(x = par, y = est, group = name)) +
-      geom_point(aes(colour = name), position = pd) +
-      geom_errorbar(aes(ymin = lb, ymax = ub, colour = name), position = 0.5) +
+      geom_point(aes(colour = name), position = position_dodge(width = pd)) +
+      geom_errorbar(aes(ymin = lb, ymax = ub, colour = name), position = position_dodge(width = pd)) +
       theme(legend.title = element_blank(), axis.title = element_blank()) +
       geom_hline(yintercept = 0, colour = "darkgrey") +
       coord_flip()
