@@ -4,6 +4,8 @@
 #' Results from multiple fit objects can be plotted for comparison.
 #'
 #' @export
+#' @importFrom reshape2 melt
+#' @importFrom ggplot2 ggplot
 #' @param fit A named list with one or more objects of class `stanfit` returned by `stan_reg_lm`.
 #' @param est A character indicating the posterior estimate to plot. Options are: posterior mean or median.
 #' @param CI Numeric value specifying the probability \eqn{p \in (0,1)}{p (0 < p < 1)} indicating the desired
@@ -36,9 +38,9 @@ plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names
   }
   df.comb = do.call(rbind.data.frame, df)
 
-  dfm1 = reshape2::melt(df.comb[, c("par", "est", "name")], id.vars = c("par", "name"), value.name = "est")
-  dfm2 = reshape2::melt(df.comb[, c("par", "lb", "name")], id.vars = c("par", "name"), value.name = "lb")
-  dfm3 = reshape2::melt(df.comb[, c("par", "ub", "name")], id.vars = c("par", "name"), value.name = "ub")
+  dfm1 = melt(df.comb[, c("par", "est", "name")], id.vars = c("par", "name"), value.name = "est")
+  dfm2 = melt(df.comb[, c("par", "lb", "name")], id.vars = c("par", "name"), value.name = "lb")
+  dfm3 = melt(df.comb[, c("par", "ub", "name")], id.vars = c("par", "name"), value.name = "ub")
   dfm = Reduce(function(x, y) merge(x, y, all=TRUE), list(subset(dfm1, select = -variable), subset(dfm2, select = -variable),
                                                           subset(dfm3, select = -variable)))
 
