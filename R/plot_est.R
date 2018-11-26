@@ -48,7 +48,7 @@ plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names
     plotlist = list()
     for(i in 1:(length(sq)-1)){
       dfsel = dfm[sq[i]:(sq[i+1]-1), ]
-      plotlist[[i]] = ggplot(data = dfsel, aes(x = par, y = est, group = name)) +
+      plotlist[[i]] = ggplot2::ggplot(data = dfsel, aes(x = par, y = est, group = name)) +
         geom_point(aes(colour = name), position = pd) +
         geom_errorbar(aes(ymin = lb, ymax = ub, colour = name), position = pd) +
         theme(legend.title = element_blank(), axis.title = element_blank()) +
@@ -60,7 +60,7 @@ plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names
   if(length(npar) != 1){
     plotlist = list()
     dfsel = dfm[dfm$par %in% levels(dfm$par)[1:10], ]
-    plotlist[[1]] = ggplot(data = dfsel, aes(x = par, y = est, group = name)) +
+    plotlist[[1]] = ggplot2::ggplot(data = dfsel, aes(x = par, y = est, group = name)) +
       geom_point(aes(colour = name), position = pd) +
       geom_errorbar(aes(ymin = lb, ymax = ub, colour = name), position = pd) +
       theme(legend.title = element_blank(), axis.title = element_blank()) +
