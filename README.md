@@ -90,11 +90,20 @@ The prediction mean squared error (PMSE) on the test set is obtained as follows:
 pmse_lm(fit, y = dat$y, N_train = 40)
 ```
 
-Finally, we can perform variable selection based on the credibility interval criterion, excluding predictors for which the marginal credibility interval covers 0:
+We can perform variable selection based on the credibility interval criterion, excluding predictors for which the marginal credibility interval covers 0:
 
 ```
 select_lm(fit, X = dat$x, prob = 0.90)
 ```
+
+Finally, a plot function is included to plot point estimates and credibility intervals for various fitobjects obtained with the `stan_reg_lm` function. To use this function, combine different `stanfit` objects, for example using different priors or hyperparameter settings, in a named list:
+
+```
+fitlist <- list(fit1, fit2)
+names(fitlist) <- c("fit1", "fit2")
+plots <- plot_est(fitlist, est = "mean", CI = 0.95)
+plots[[1]]
+``` 
 
 See also the documentation for the different functions, using e.g., `?select_lm`.
 
