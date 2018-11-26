@@ -1,8 +1,8 @@
 #' Plot results for Bayesian regularized regression models
 #'
-#' Function to plot point estimates and credibility intervals for models fit using `stan_reg_lm`. 
+#' Function to plot point estimates and credibility intervals for models fit using `stan_reg_lm`.
 #' Results from multiple fit objects can be plotted for comparison.
-#' 
+#'
 #' @export
 #' @param fit A named list with one or more objects of class `stanfit` returned by `stan_reg_lm`.
 #' @param est A character indicating the posterior estimate to plot. Options are: posterior mean or median.
@@ -35,14 +35,14 @@ plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names
     }
   }
   df.comb = do.call(rbind.data.frame, df)
-  
-  dfm1 = melt(df.comb[, c("par", "est", "name")], id.vars = c("par", "name"), value.name = "est")
-  dfm2 = melt(df.comb[, c("par", "lb", "name")], id.vars = c("par", "name"), value.name = "lb")
-  dfm3 = melt(df.comb[, c("par", "ub", "name")], id.vars = c("par", "name"), value.name = "ub")
-  dfm = Reduce(function(x, y) merge(x, y, all=TRUE), list(subset(dfm1, select = -variable), subset(dfm2, select = -variable), 
+
+  dfm1 = reshape2::melt(df.comb[, c("par", "est", "name")], id.vars = c("par", "name"), value.name = "est")
+  dfm2 = reshape2::melt(df.comb[, c("par", "lb", "name")], id.vars = c("par", "name"), value.name = "lb")
+  dfm3 = reshape2::melt(df.comb[, c("par", "ub", "name")], id.vars = c("par", "name"), value.name = "ub")
+  dfm = Reduce(function(x, y) merge(x, y, all=TRUE), list(subset(dfm1, select = -variable), subset(dfm2, select = -variable),
                                                           subset(dfm3, select = -variable)))
-  
-  
+
+
   if(length(npar) == 1){
     sq = c(seq(1, nrow(dfm), npar), nrow(dfm) + 1)
     plotlist = list()
@@ -56,7 +56,7 @@ plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names
         coord_flip()
     }
   }
-  
+
   if(length(npar) != 1){
     plotlist = list()
     dfsel = dfm[dfm$par %in% levels(dfm$par)[1:10], ]
@@ -67,6 +67,6 @@ plot_est <- function(fit, est = c("mean", "median"), CI = 0.95, npar = 50, names
       geom_hline(yintercept = 0, colour = "darkgrey") +
       coord_flip()
   }
-  
+
   return(plotlist)
 }
