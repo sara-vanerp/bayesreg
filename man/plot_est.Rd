@@ -26,6 +26,6 @@ same way as the columns of the input matrix X used in the `stan_reg_lm` function
 A list with ggplot objects.
 }
 \description{
-Function to plot point estimates and credibility intervals for models fit using `stan_reg_lm`. 
+Function to plot point estimates and credibility intervals for models fit using `stan_reg_lm`.
 Results from multiple fit objects can be plotted for comparison.
 }
