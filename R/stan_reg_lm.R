@@ -54,6 +54,6 @@ stan_reg_lm <- function(X, y, N_train,
 						 scale_global = tau0, nu_global = global_df, nu_local = local_df, slab_scale = slab_scale, slab_df = slab_df)
 	}
 
-  	out <- rstan::sampling(stanmodels[[mod]], data = standata, ...)
+  	out <- rstan::sampling(stanmodels[[mod]], data = standata, show_messages = TRUE, ...)
   	return(out)
 }
