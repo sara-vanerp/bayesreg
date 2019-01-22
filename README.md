@@ -23,16 +23,15 @@ To install the package from Github, first load **devtools**:
 library(devtools)
 ```
 
-Next, install **bayesreg** and make sure that `local = TRUE` to avoid recompilation of the Stan models.
+Next, install **bayesreg** and make sure that `local = TRUE` to avoid recompilation of the Stan models. On Mac, the version of the package in the master branch can be installed as follows:
 
 ```
-install_github("sara-vanerp/bayesreg", local = TRUE)
+devtools::install_github("sara-vanerp/bayesreg", local = TRUE)
 ```
-On Windows, the above method might not always work. In that case, download the zip file for the package, unzip it, and install the package directly using **devtools** as follows:
+For Windows, the version of the package should be installed that is available in the Windows branch (thanks to Duco Veen for making this happen), as follows:
 
 ```
-path <- "insert path to package folder"
-install(path)
+devtools::install_github("sara-vanerp/bayesreg@windows", local = TRUE)
 ```
 
 The package can now be loaded into R and used:
