@@ -40,6 +40,14 @@ stan_reg_lm <- function(X, y, N_train,
 	ntest = nrow(X) - N_train
 	xtest = X[(N_train + 1):nrow(X), ]
 
+	# check if predictors are standardized
+	means = colMeans(X)
+	sds = apply(X, 2, sd)
+
+	if(means > 0.1 || means < -0.1 || sds > 1.1 || sds < 0.9){
+		warning("The predictors do not seem to be standardized. It is highly recommended to standardize the predictors before the analysis.")
+	}
+
 	# create stan input & run
 	if(prior %in% c("ridge", "student", "lasso", "elasticNet", "horseshoe", "mixture")){
 		standata <- list(N_train = N_train, p = npred, y_train = ytrain, X_train = xtrain, N_test = ntest, X_test = xtest)
